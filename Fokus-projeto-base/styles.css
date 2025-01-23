@@ -79,9 +79,9 @@ h1, h2, h3, h4, h5, h6 {
     border-radius: 3.2rem;
     border: 0.2rem solid var(--azul-royal);
     background: var(--fundo-card-timer);
-    padding: 2.4rem;
+    padding: 2.5rem;
     margin: 8rem 0;
-    width: 59rem;
+    width: 65rem;
     max-width: 90%;
 }
 
@@ -94,27 +94,44 @@ h1, h2, h3, h4, h5, h6 {
     justify-content: center;
     gap: 1.6rem;
 }
-
 .app__card-button {
+    width: 180px;
+    height: 60px;
+    cursor: pointer;
+    background: transparent;
+    border: 1px solid #91C9FF;
+    outline: none;
+    transform: translate(0, 0);}
+
+svg {
+    position: absolute;
+    left: 0;
+    top: 0;
+    fill: none;
+    stroke: #fff;
+    stroke-dasharray: 150 480;
+    stroke-dashoffset: 150;
+    transition: 1s ease-in-out;
+  }
+
+.app__card-button:hover {
+    transition: 1s ease-in-out;
+    background: #4F95DA;
+  }
+
+.app__card-button:hover svg {
+    stroke-dashoffset: -480;
+}
+
+.app__card-button span {
     font-family: Montserrat;
     font-size: 1.8rem;
     font-style: normal;
     font-weight: 400;
     line-height: 150%;
-    background: none;
     padding: 0.8rem;
     color: var(--color-secondary);
-    border: none;
-    cursor: pointer;
-    outline: inherit;
 }
-
-.app__card-button.active {
-    border-radius: 0.8rem;
-    background: var(--azul-royal);
-    font-weight: 600;
-}
-
 .app__card-timer {
     color: var(--color-secondary);
     text-align: center;
