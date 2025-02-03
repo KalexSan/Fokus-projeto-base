@@ -133,6 +133,10 @@ svg {
     background: #4F95DA;
   }
 
+  .app__card-button.active {
+    background: #4F95DA;
+  }
+
 .app__card-button:hover svg {
     stroke-dashoffset: -480;
 }
