@@ -7,12 +7,19 @@ const displayTimer = document.querySelector('#timer')
 const banner = document.querySelector('.app__image')
 const titulo = document.querySelector('.app__title')
 const playMusicInput = document.getElementById('alternar-musica')
+const startPauseBt = document.querySelector('#start-pause')
+const comecarouPausaSpan = document.querySelector('#start-pause span')
 const music = new Audio('sons/luna-rise-part-one.mp3')
+const musicPlay = new Audio('sons/play.wav')
+const musicPause = new Audio('sons/pause.mp3')
+const musicBeep = new Audio('sons/beep.mp3')
 music.loop = true
-const startPauseBt = document.querySelector('.app__card-primary-button')
+let tempoDecorridoSegundo = 10
+let intervaloId = null
 const timeFocus = 1500
 const timeShortBreak = 300
 const timeLongBreak = 900
+
 
 focoBt.addEventListener('click', () => {
     alterarContexto('foco', 'foco.png')
@@ -34,6 +41,20 @@ playMusicInput.addEventListener('change', () => {
         music.pause()
     }
 })
+
+const contagemRegressiva = () => {
+    if (tempoDecorridoSegundo <= 0) {
+        zerar()
+        return
+    } if (tempoDecorridoSegundo <= 7) {
+        if (musicBeep.paused)
+        musicBeep.play()
+    }
+    tempoDecorridoSegundo -= 1
+    console.log(tempoDecorridoSegundo)
+}
+
+startPauseBt.addEventListener('click', iniciarouPausar )
 
 function alterarContexto(contexto, imagem) {
     html.setAttribute('data-contexto', contexto)
@@ -75,4 +96,29 @@ function alterarContexto(contexto, imagem) {
     button.forEach(function (contexto) {
         contexto.classList.remove('active')
     })
+}
+
+function iniciarouPausar() {
+    if (intervaloId) {
+        pausar()
+        musicPause.play()
+        comecarouPausaSpan.innerHTML = 'Começar'
+        return
+    } else {
+        musicPlay.play()
+        intervaloId = setInterval(contagemRegressiva, 1000)
+        comecarouPausaSpan.innerHTML = 'Pausar'
+    }
+}
+
+function pausar() {
+    clearInterval(intervaloId)
+    intervaloId = null
+    musicBeep.pause()
+    musicBeep.currentTime = 0
+}
+
+function zerar() {
+    pausar()
+    tempoDecorridoSegundo = 10
 }
